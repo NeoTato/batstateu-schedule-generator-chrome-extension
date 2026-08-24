@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "BatStateU Schedule Generator & Timetable Maker",
+  "version": "1.0.0",
+  "description": "Automatically extracts your encoded subjects from the BatStateU portal and generates a clean, Gizmoa-style weekly class timetable.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "*://*.batstate-u.edu.ph/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "file:///*"
+  ],
+  "action": {
+    "default_title": "BatStateU Schedule Generator",
+    "default_popup": "src/visualizer/timetable-viewer.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.batstate-u.edu.ph/*",
+        "http://localhost/*",
+        "http://127.0.0.1/*",
+        "file:///*sample-portal.html*"
+      ],
+      "js": ["src/content/scraper.js", "src/content/injector.js"],
+      "css": ["src/content/styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/visualizer/*", "src/assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "icons": {
+    "16": "src/assets/icons/icon-16.png",
+    "48": "src/assets/icons/icon-48.png",
+    "128": "src/assets/icons/icon-128.png"
+  }
+}

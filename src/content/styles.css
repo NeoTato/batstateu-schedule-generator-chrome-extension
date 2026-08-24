@@ -1,0 +1,111 @@
+/* Injected Button and Modal Styles for BatStateU Schedule Generator */
+
+.bsu-sched-injected-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+  color: #ffffff !important;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid #7f1d1d;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(185, 28, 28, 0.25);
+  transition: all 0.2s ease-in-out;
+  margin-left: -5px;
+  margin-right: 17px;
+  vertical-align: middle;
+  text-decoration: none !important;
+  z-index: 1000;
+}
+
+.bsu-sched-injected-btn:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  box-shadow: 0 4px 10px rgba(185, 28, 28, 0.35);
+  transform: translateY(-1px);
+  color: #ffffff !important;
+}
+
+.bsu-sched-injected-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(185, 28, 28, 0.2);
+}
+
+/* Floating Action Button on Portal */
+.bsu-sched-floating-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+  color: #ffffff;
+  padding: 12px 18px;
+  border-radius: 50px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(185, 28, 28, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 999999;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bsu-sched-floating-fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(185, 28, 28, 0.5);
+}
+
+/* Overlay Modal for Embedded Timetable Viewer */
+.bsu-sched-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 1000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bsuFadeIn 0.2s ease-out;
+}
+
+.bsu-sched-modal-container {
+  width: 95vw;
+  max-width: 1200px;
+  height: 90vh;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.bsu-sched-modal-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+@keyframes bsuFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

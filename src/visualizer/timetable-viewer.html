@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BatStateU Schedule Generator & Timetable Maker</title>
+  <link rel="stylesheet" href="timetable-viewer.css">
+</head>
+<body>
+
+  <!-- Top Controls & Branding Toolbar -->
+  <header class="viewer-header">
+    <div class="brand-section">
+      <div class="brand-logo">BSU</div>
+      <input type="text" id="title-input" class="title-input" value="CS-4102 1st Semester Schedule" placeholder="Schedule Title">
+    </div>
+
+    <div class="controls-section">
+      <!-- Action Buttons -->
+      <button id="btn-download-png" class="btn btn-primary" title="Download High Resolution PNG">
+        <span>Download HD PNG</span>
+      </button>
+
+      <button id="btn-download-wallpaper" class="btn btn-secondary" title="Export 9:16 Phone Wallpaper">
+        <span>Phone Wallpaper (9:16)</span>
+      </button>
+
+      <button id="btn-export-ics" class="btn btn-secondary" title="Export to Google / Apple Calendar">
+        <span>Add to Calendar (.ics)</span>
+      </button>
+
+      <button id="btn-close-viewer" class="btn-close-viewer" title="Close">✕</button>
+    </div>
+  </header>
+
+  <!-- Main Scrollable Body Area -->
+  <main class="viewer-body">
+    <div class="schedule-card">
+      <h2 id="display-title" class="schedule-title-display">CS-4102 1st Semester Schedule</h2>
+
+      <!-- Timetable Grid -->
+      <div class="timetable-grid-wrapper" id="grid-wrapper">
+        <div class="timetable-header-row" id="grid-header-row">
+          <!-- Day column headers inserted by JS -->
+        </div>
+        <div class="timetable-content-area" id="grid-content-area">
+          <!-- Time axis and class blocks inserted by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary of Encoded Subjects -->
+    <div class="summary-table-section">
+      <h4>Encoded Subjects Overview (<span id="total-units">0</span> Total Units)</h4>
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Course Code</th>
+            <th>Descriptive Title</th>
+            <th>Units</th>
+            <th>Instructor</th>
+            <th>Schedule & Room</th>
+          </tr>
+        </thead>
+        <tbody id="summary-table-body">
+          <!-- Rows inserted by JS -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Load Scripts -->
+  <script src="timetable-core.js"></script>
+  <script src="image-exporter.js"></script>
+  <script src="calendar-exporter.js"></script>
+  <script src="timetable-viewer.js"></script>
+</body>
+</html>

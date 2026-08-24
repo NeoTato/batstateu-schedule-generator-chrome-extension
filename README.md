@@ -1,4 +1,4 @@
-# BatStateU Schedule Generator (Chrome Extension)
+# BatStateU Schedule Generator & Timetable Maker (Chrome Extension)
 
 A lightweight Manifest V3 Chrome Extension that automatically extracts encoded subjects from the Batangas State University (BatStateU) student portal and generates a clean, Gizmoa-inspired weekly schedule timetable with a single click.
 
@@ -6,7 +6,7 @@ A lightweight Manifest V3 Chrome Extension that automatically extracts encoded s
 
 ## About This Project
 
-Every semester, I would go to https://gizmoa.com/college-schedule-maker/ and manually create a schedule using the details from the portal.
+I am a 4th-year Computer Science student at Batangas State University. Every semester, my blockmates and I would manually type our encoded subjects, times, and room locations into Gizmoa's schedule maker just to make an image of our weekly class schedule.
 
 I wanted to automate this repetitive workflow, so I built this side-project utility. This project was created with AI assistance (vibe-coded using AI tools) as a practical tool for fellow BatStateU students to save time during enrollment and class schedule updates.
 
@@ -30,18 +30,23 @@ I wanted to automate this repetitive workflow, so I built this side-project util
 
 ## How to Install and Use
 
-### Step 1: Load the Extension in Chrome / Edge / Brave
+### Step 1: Download or Clone the Repository
+
+Clone this repository or download the ZIP from GitHub and extract it to a folder on your computer:
+
+```bash
+git clone https://github.com/NeoTato/batstateu-schedule-generator-chrome-extension.git
+```
+
+### Step 2: Load the Extension in Chrome / Edge / Brave
 
 1. Open your browser and navigate to `chrome://extensions` (or `edge://extensions` in Microsoft Edge).
 2. Toggle on **"Developer mode"** in the top-right corner.
 3. Click the **"Load unpacked"** button in the top-left.
-4. Select this project folder:
-   ```
-   c:\ProgrammingStuff\Projects\automated-schedule-generator-bsu-extension
-   ```
+4. Select the extracted `batstateu-schedule-generator-chrome-extension` folder.
 5. The **"BatStateU Schedule Generator & Timetable Maker"** extension will appear in your browser.
 
-### Step 2: Use on the BatStateU Portal
+### Step 3: Use on the BatStateU Portal
 
 1. Log into your **BatStateU Student Portal**.
 2. Click on **"Subjects"** to open the **"Encoded Subjects"** modal popup.
@@ -53,7 +58,6 @@ I wanted to automate this repetitive workflow, so I built this side-project util
 ## Testing Locally (Without logging into the portal)
 
 To test the extension offline without logging into the live portal:
-
 1. Open `src/test/sample-portal.html` in your browser.
 2. Click the **"Generate Timetable"** button in the modal to test the full flow.
 
@@ -62,7 +66,7 @@ To test the extension offline without logging into the live portal:
 ## Project Structure
 
 ```
-automated-schedule-generator-bsu-extension/
+batstateu-schedule-generator-chrome-extension/
 ├── manifest.json                  # Manifest V3 extension configuration
 ├── src/
 │   ├── content/

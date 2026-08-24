@@ -6,7 +6,7 @@ A lightweight Manifest V3 Chrome Extension that automatically extracts encoded s
 
 ## About This Project
 
-I am a 4th-year Computer Science student at Batangas State University. Every semester, my blockmates and I would manually type our encoded subjects, times, and room locations into Gizmoa's schedule maker just to make an image of our weekly class schedule.
+I am a Computer Science student at Batangas State University. Every semester, I would manually type our encoded subjects, times, and room locations into Gizmoa's schedule maker just to make an image of our weekly class schedule.
 
 I wanted to automate this repetitive workflow, so I built this side-project utility. This project was created with AI assistance (vibe-coded using AI tools) as a practical tool for fellow BatStateU students to save time during enrollment and class schedule updates.
 

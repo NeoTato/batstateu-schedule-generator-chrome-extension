@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     contentArea.style.height = `${totalGridHeight}px`;
     contentArea.innerHTML = "";
 
-    // Time Axis with line-anchored labels
+    // Time Axis with clean line-anchored labels (no strike-through lines)
     const timeAxis = document.createElement("div");
     timeAxis.className = "time-axis-col";
     intervals.forEach((inv, iIdx) => {
@@ -131,13 +131,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       const labelDiv = document.createElement("div");
       labelDiv.className = `time-axis-label ${inv.isHour ? "hour-label" : ""}`;
       labelDiv.style.top = `${topPx}px`;
+
+      if (iIdx === 0) {
+        labelDiv.style.transform = "translateY(2px)";
+      } else if (iIdx === intervals.length - 1) {
+        labelDiv.style.transform = "translateY(-100%)";
+      } else {
+        labelDiv.style.transform = "translateY(-50%)";
+      }
+
       labelDiv.innerText = inv.label;
       timeAxis.appendChild(labelDiv);
-
-      const line = document.createElement("div");
-      line.className = `grid-guideline ${inv.isHour ? "hour-line" : ""}`;
-      line.style.top = `${topPx}px`;
-      timeAxis.appendChild(line);
     });
     contentArea.appendChild(timeAxis);
 
@@ -162,7 +166,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         block.className = "sched-block";
 
         const topPx = ((slot.startMinutes - startHour * 60) / 30) * ROW_HEIGHT;
-        const heightPx = ((slot.endMinutes - slot.startMinutes) / 30) * ROW_HEIGHT;
+        const heightPx =
+          ((slot.endMinutes - slot.startMinutes) / 30) * ROW_HEIGHT;
 
         block.style.top = `${topPx}px`;
         block.style.height = `${heightPx}px`;

@@ -192,7 +192,7 @@ body {
 .timetable-content-area {
   display: grid;
   position: relative;
-  min-height: 740px;
+  background: #ffffff;
 }
 
 /* Time Axis Column */
@@ -207,12 +207,13 @@ body {
   position: absolute;
   right: 8px;
   transform: translateY(-50%);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   color: #334155;
   white-space: nowrap;
   line-height: 1;
   pointer-events: none;
+  z-index: 5;
 }
 
 .time-axis-label.hour-label {

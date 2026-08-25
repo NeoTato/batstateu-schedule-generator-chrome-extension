@@ -96,10 +96,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const days = core.getDisplayDays();
     const intervals = core.getTimeIntervals();
     const slots = core.getProcessedSlots();
+    const startHour = core.startHour;
+
+    const ROW_HEIGHT = 34; // Pixel height per 30-minute interval
+    const totalSlots = intervals.length - 1;
+    const totalGridHeight = totalSlots * ROW_HEIGHT;
 
     // 1. Header row
     const headerRow = document.getElementById("grid-header-row");
-    headerRow.style.gridTemplateColumns = `90px repeat(${days.length}, 1fr)`;
+    headerRow.style.gridTemplateColumns = `85px repeat(${days.length}, 1fr)`;
     headerRow.innerHTML = `
       <div class="day-header-cell" style="background:#ffffff; font-size:12px;">Time</div>
       ${days
@@ -113,17 +118,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 2. Content area
     const contentArea = document.getElementById("grid-content-area");
-    contentArea.style.gridTemplateColumns = `90px repeat(${days.length}, 1fr)`;
+    contentArea.style.gridTemplateColumns = `85px repeat(${days.length}, 1fr)`;
+    contentArea.style.height = `${totalGridHeight}px`;
     contentArea.innerHTML = "";
 
-    // Time Axis
+    // Time Axis with line-anchored labels
     const timeAxis = document.createElement("div");
     timeAxis.className = "time-axis-col";
-    intervals.slice(0, -1).forEach((inv) => {
-      const slotDiv = document.createElement("div");
-      slotDiv.className = `time-axis-slot ${inv.isHour ? "hour-slot" : ""}`;
-      slotDiv.innerText = inv.label;
-      timeAxis.appendChild(slotDiv);
+    intervals.forEach((inv, iIdx) => {
+      const topPx = iIdx * ROW_HEIGHT;
+
+      const labelDiv = document.createElement("div");
+      labelDiv.className = `time-axis-label ${inv.isHour ? "hour-label" : ""}`;
+      labelDiv.style.top = `${topPx}px`;
+      labelDiv.innerText = inv.label;
+      timeAxis.appendChild(labelDiv);
+
+      const line = document.createElement("div");
+      line.className = `grid-guideline ${inv.isHour ? "hour-line" : ""}`;
+      line.style.top = `${topPx}px`;
+      timeAxis.appendChild(line);
     });
     contentArea.appendChild(timeAxis);
 
@@ -133,10 +147,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       dayCol.className = "day-column";
 
       // Background guidelines
-      intervals.slice(0, -1).forEach((inv, iIdx) => {
+      intervals.forEach((inv, iIdx) => {
+        const topPx = iIdx * ROW_HEIGHT;
         const line = document.createElement("div");
         line.className = `grid-guideline ${inv.isHour ? "hour-line" : ""}`;
-        line.style.top = `${(iIdx / (intervals.length - 1)) * 100}%`;
+        line.style.top = `${topPx}px`;
         dayCol.appendChild(line);
       });
 
@@ -145,8 +160,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       daySlots.forEach((slot) => {
         const block = document.createElement("div");
         block.className = "sched-block";
-        block.style.top = `${slot.topPercent}%`;
-        block.style.height = `${slot.heightPercent}%`;
+
+        const topPx = ((slot.startMinutes - startHour * 60) / 30) * ROW_HEIGHT;
+        const heightPx = ((slot.endMinutes - slot.startMinutes) / 30) * ROW_HEIGHT;
+
+        block.style.top = `${topPx}px`;
+        block.style.height = `${heightPx}px`;
         block.style.backgroundColor = slot.color.bg;
         block.style.color = "#000000";
         block.style.borderColor = "#000000";

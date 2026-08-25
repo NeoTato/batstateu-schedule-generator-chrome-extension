@@ -160,9 +160,13 @@ class BsuScheduleScraper {
         const standardDay = BsuScheduleScraper.standardizeDay(dayRaw);
         if (!standardDay) return;
 
-        const timeParagraphs = dl.querySelectorAll("dd p, dd");
+        // Query <p> inside <dd>; fallback to <dd> only if no <p> is present
+        let timeElements = Array.from(dl.querySelectorAll("dd p"));
+        if (timeElements.length === 0) {
+          timeElements = Array.from(dl.querySelectorAll("dd"));
+        }
 
-        timeParagraphs.forEach((timeP) => {
+        timeElements.forEach((timeP) => {
           const rawTimeText = timeP.innerText.trim();
           if (!rawTimeText) return;
 
@@ -186,15 +190,26 @@ class BsuScheduleScraper {
               roomRaw.toLowerCase().includes("online") ||
               standardDay === "Friday";
 
-            schedules.push({
-              day: standardDay,
-              startTime: startTimeStr,
-              endTime: endTimeStr,
-              startMinutes: startMin,
-              endMinutes: endMin,
-              room: roomRaw,
-              isOnline: isOnline,
-            });
+            // Prevent any duplicate schedule entries for the same subject
+            const isDuplicate = schedules.some(
+              (s) =>
+                s.day === standardDay &&
+                s.startTime === startTimeStr &&
+                s.endTime === endTimeStr &&
+                s.room === roomRaw,
+            );
+
+            if (!isDuplicate) {
+              schedules.push({
+                day: standardDay,
+                startTime: startTimeStr,
+                endTime: endTimeStr,
+                startMinutes: startMin,
+                endMinutes: endMin,
+                room: roomRaw,
+                isOnline: isOnline,
+              });
+            }
           }
         });
       });

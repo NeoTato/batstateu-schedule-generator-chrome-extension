@@ -179,7 +179,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       totalUnits += s.units || 0;
       const row = document.createElement("tr");
 
-      const schedSummaries = (s.schedules || [])
+      // Deduplicate schedules for display
+      const uniqueSlots = [];
+      (s.schedules || []).forEach((sc) => {
+        const key = `${sc.day}_${sc.startTime}_${sc.endTime}_${sc.room}`;
+        if (
+          !uniqueSlots.some(
+            (u) => `${u.day}_${u.startTime}_${u.endTime}_${u.room}` === key,
+          )
+        ) {
+          uniqueSlots.push(sc);
+        }
+      });
+
+      const schedSummaries = uniqueSlots
         .map(
           (sc) =>
             `<strong>${sc.day}</strong>: ${sc.startTime} - ${sc.endTime} (${sc.room})`,
